@@ -87,11 +87,15 @@ export default class Page {
     }
 
     this.animationIn.call(() => {
+      this.addEventListeners();
+
       this.isVisible = true;
     });
   }
 
   hide() {
+    this.destroy();
+
     this.isVisible = false;
 
     return new Promise((res) => {
@@ -100,6 +104,13 @@ export default class Page {
         onComplete: () => res(),
       });
     });
+  }
+
+  /**
+   * Destroy.
+   */
+  destroy() {
+    this.removeEventListeners();
   }
 
   /**
@@ -192,4 +203,11 @@ export default class Page {
 
     this.scroll.last = this.scroll.current;
   }
+
+  /**
+   * Listeners.
+   */
+  addEventListeners() {}
+
+  removeEventListeners() {}
 }
